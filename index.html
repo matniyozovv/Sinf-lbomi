@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinf albomi</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Auth qismi -->
+        <div class="auth-section" id="authSection">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" id="loginTab">Kirish</button>
+                    <button class="auth-tab" id="registerTab">Ro'yxatdan o'tish</button>
+                </div>
+                
+                <!-- Kirish formasi -->
+                <div class="auth-form active" id="loginForm">
+                    <h2 class="auth-title">👋 Xush kelibsiz!</h2>
+                    <p class="auth-subtitle">Sinf albomiga kirish uchun hisobingizga kiring</p>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="loginEmail">
+                            📧 Email manzil
+                        </label>
+                        <input type="email" class="form-input" id="loginEmail" placeholder="example@mail.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="loginPassword">
+                            🔒 Parol
+                        </label>
+                        <input type="password" class="form-input" id="loginPassword" placeholder="••••••••">
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox"> Eslab qol
+                        </label>
+                        <a href="#" class="forgot-password">Parolni unutdingizmi?</a>
+                    </div>
+                    
+                    <button class="auth-btn" id="loginBtn" onclick="handleLogin()">
+                        🚪 Kirish
+                    </button>
+                    
+                    <div class="auth-divider">
+                        <span>yoki</span>
+                    </div>
+                    
+                    <div class="social-login">
+                        <button class="social-btn">
+                            <span class="social-icon">G</span> Google
+                        </button>
+                        <button class="social-btn">
+                            <span class="social-icon">📘</span> Facebook
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Ro'yxatdan o'tish formasi -->
+                <div class="auth-form" id="registerForm">
+                    <h2 class="auth-title">📝 Ro'yxatdan o'tish</h2>
+                    <p class="auth-subtitle">Sinf albomiga qo'shiling va yangiliklarni kuzatib boring</p>
+                    
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label class="form-label" for="regFirstName">
+                                👤 Ism
+                            </label>
+                            <input type="text" class="form-input" id="regFirstName" placeholder="Ismingiz">
+                        </div>
+                        
+                        <div class="form-group half">
+                            <label class="form-label" for="regLastName">
+                                👤 Familiya
+                            </label>
+                            <input type="text" class="form-input" id="regLastName" placeholder="Familiyangiz">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="regEmail">
+                            📧 Email manzil
+                        </label>
+                        <input type="email" class="form-input" id="regEmail" placeholder="example@mail.com">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label class="form-label" for="regPassword">
+                                🔒 Parol
+                            </label>
+                            <input type="password" class="form-input" id="regPassword" placeholder="••••••••">
+                        </div>
+                        
+                        <div class="form-group half">
+                            <label class="form-label" for="regConfirmPassword">
+                                🔒 Parolni takrorlang
+                            </label>
+                            <input type="password" class="form-input" id="regConfirmPassword" placeholder="••••••••">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="regRole">
+                            👥 Kim sifatida
+                        </label>
+                        <select class="form-input" id="regRole">
+                            <option value="student">🎓 O'quvchi</option>
+                            <option value="teacher">👩‍🏫 O'qituvchi</option>
+                            <option value="parent">👪 Ota-ona</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox"> Men <a href="#" style="color: #4ecdc4;">foydalanish shartlari</a> bilan tanishdim
+                        </label>
+                    </div>
+                    
+                    <button class="auth-btn" id="registerBtn" onclick="handleRegister()">
+                        📝 Ro'yxatdan o'tish
+                    </button>
+                </div>
+                
+                <!-- Demo ma'lumotlari -->
+                <div class="demo-info">
+                    <div class="demo-info-header">
+                        <span class="demo-badge">📋 Demo ma'lumotlar</span>
+                    </div>
+                    <div class="demo-info-content">
+                        <p><strong>Email:</strong> demo@sinf.uz</p>
+                        <p><strong>Parol:</strong> demo123</p>
+                        <p style="font-size: 0.85em; margin-top: 8px; color: #666;">Kirish uchun yuqoridagi ma'lumotlardan foydalaning</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Asosiy kontent (dastlab yashirin) -->
+        <div class="main-content" id="mainContent" style="display: none;">
+            <div class="user-header">
+                <div class="user-welcome">
+                    <span class="welcome-text">👋 Xush kelibsiz, <span id="userName">Foydalanuvchi</span></span>
+                    <span class="user-role" id="userRole">O'quvchi</span>
+                </div>
+                <button class="logout-btn" onclick="handleLogout()">
+                    🚪 Chiqish
+                </button>
+            </div>
+            
+            <h1>📸 SINF ALBOMI</h1>
+            <div class="subtitle">11-A sinf | 2024-2025 o'quv yili</div>
+
+            <div class="sinf-info">
+                <div class="info-item">
+                    <i>👥</i>
+                    <h3>O'quvchilar soni</h3>
+                    <p>32</p>
+                </div>
+                <div class="info-item">
+                    <i>⭐</i>
+                    <h3>A'lochilar</h3>
+                    <p>8</p>
+                </div>
+                <div class="info-item">
+                    <i>📚</i>
+                    <h3>Fanlar soni</h3>
+                    <p>14</p>
+                </div>
+                <div class="info-item">
+                    <i>🏆</i>
+                    <h3>Olimpiada g'oliblari</h3>
+                    <p>5</p>
+                </div>
+                <div class="info-item">
+                    <i>📊</i>
+                    <h3>O'rtacha ball</h3>
+                    <p>84.6</p>
+                </div>
+            </div>
+
+            <div class="sinf-rahbari">
+                <div class="rahbari-rasm">👩‍🏫</div>
+                <div class="rahbari-info">
+                    <h2>Raximova Dilbar Olimovna</h2>
+                    <p>🏫 Sinf rahbari (Matematika fani o'qituvchisi)</p>
+                    <p>📞 +998 90 123 45 67</p>
+                    <p>✉️ dilbar.rakhimova@gmail.com</p>
+                    <p>🎓 15 yillik pedagogik tajriba</p>
+                    <p>🏅 "O'zbekiston Respublikasida xizmat ko'rsatgan yosh murabbiy"</p>
+                </div>
+            </div>
+
+            <div class="fanlar-section">
+                <h2>📚 FANLAR VA O'QITUVCHILAR</h2>
+                <div class="fanlar-grid">
+                    <div class="fan-item">
+                        <i>🧮</i>
+                        <h4>Matematika</h4>
+                        <p>Raximova D.O.</p>
+                        <p>5 soat/hafta</p>
+                        <span class="baho">82.3</span>
+                    </div>
+                    <div class="fan-item">
+                        <i>⚛️</i>
+                        <h4>Fizika</h4>
+                        <p>Karimov A.Sh.</p>
+                        <p>4 soat/hafta</p>
+                        <span class="baho">79.8</span>
+                    </div>
+                    <div class="fan-item">
+                        <i>🧪</i>
+                        <h4>Kimyo</h4>
+                        <p>Usmanova N.T.</p>
+                        <p>3 soat/hafta</p>
+                        <span class="baho">85.2</span>
+                    </div>
+                    <div class="fan-item">
+                        <i>🧬</i>
+                        <h4>Biologiya</h4>
+                        <p>Tursunova M.A.</p>
+                        <p>3 soat/hafta</p>
+                        <span class="baho">81.5</span>
+                    </div>
+                    <div class="fan-item">
+                        <i>🏛️</i>
+                        <h4>Tarix</h4>
+                        <p>Nurmatov R.X.</p>
+                        <p>3 soat/hafta</p>
+                        <span class="baho">88.1</span>
+                    </div>
+                    <div class="fan-item">
+                        <i>🌍</i>
+                        <h4>Geografiya</h4>
+                        <p>Axmedova D.U.</p>
+                        <p>2 soat/hafta</p>
+                        <span class="baho">86.4</span>
+                    </div>
+                    <div class="fan-item">
+                        <i>📖</i>
+                        <h4>Adabiyot</h4>
+                        <p>Yusupova F.R.</p>
+                        <p>4 soat/hafta</p>
+                        <span class="baho">89.7</span>
+                    </div>
+                    <div class="fan-item">
+                        <i>🇬🇧</i>
+                        <h4>Ingliz tili</h4>
+                        <p>Smith J.</p>
+                        <p>4 soat/hafta</p>
+                        <span class="baho">91.2</span>
+                    </div>
+                    <div class="fan-item">
+                        <i>🇩🇪</i>
+                        <h4>Nemis tili</h4>
+                        <p>Schmidt A.</p>
+                        <p>3 soat/hafta</p>
+                        <span class="baho">78.9</span>
+                    </div>
+                    <div class="fan-item">
+                        <i>💻</i>
+                        <h4>Informatika</h4>
+                        <p>Abdullaev B.T.</p>
+                        <p>3 soat/hafta</p>
+                        <span class="baho">94.3</span>
+                    </div>
+                    <div class="fan-item">
+                        <i>🎨</i>
+                        <h4>San'at</h4>
+                        <p>Rasulova G.A.</p>
+                        <p>2 soat/hafta</p>
+                        <span class="baho">92.8</span>
+                    </div>
+                    <div class="fan-item">
+                        <i>🏃</i>
+                        <h4>Jismoniy tarbiya</h4>
+                        <p>Abdullaev S.S.</p>
+                        <p>3 soat/hafta</p>
+                        <span class="baho">95.1</span>
+                    </div>
+                    <div class="fan-item">
+                        <i>🔧</i>
+                        <h4>Texnologiya</h4>
+                        <p>Karimov U.M.</p>
+                        <p>2 soat/hafta</p>
+                        <span class="baho">87.6</span>
+                    </div>
+                    <div class="fan-item">
+                        <i>⚖️</i>
+                        <h4>Huquq</h4>
+                        <p>Ismailov B.K.</p>
+                        <p>2 soat/hafta</p>
+                        <span class="baho">84.2</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oquvchilar-section">
+                <div class="section-header">
+                    <h2>👨‍🎓 O'QUVCHILAR (32)</h2>
+                    <div style="display: flex; gap: 15px;">
+                        <input type="text" class="search-box" id="searchInput" placeholder="🔍 O'quvchi qidirish...">
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="all">Barcha</button>
+                            <button class="filter-btn" data-filter="boys">O'g'il bolalar</button>
+                            <button class="filter-btn" data-filter="girls">Qiz bolalar</button>
+                            <button class="filter-btn" data-filter="excellent">A'lochilar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="oquvchilar-grid" id="studentsGrid">
+                    <!-- O'quvchilar dynamic ravishda qo'shiladi -->
+                </div>
+            </div>
+
+            <div class="gallery-section">
+                <h2 style="text-align: center; margin-bottom: 20px;">📸 SINF FOTOSURATLARI</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://jizzaxnews.uz/wp-content/uploads/2023/12/photo_2023-12-01_16-28-35.jpg" alt="Sinf xonasi">
+                        <div class="gallery-overlay">
+                            <h4>Matematika darsi</h4>
+                            <p>2026, mart</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://buxdu.uz/media/article/images/photo_2025-03-26_09-20-12.jpg" alt="Sport musobaqasi">
+                        <div class="gallery-overlay">
+                            <h4>Sport kuni</h4>
+                            <p>2025, fevral</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=500" alt="Kutubxonada">
+                        <div class="gallery-overlay">
+                            <h4>Kitob o'qish soati</h4>
+                            <p>2024, yanvar</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=500" alt="Bitiruv kechasi">
+                        <div class="gallery-overlay">
+                            <h4>Bitiruv kechasi</h4>
+                            <p>2025, may</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://uztexgroup.uz/assets/news/samarqand/img_0983-26.png" alt="Ekskursiya">
+                        <div class="gallery-overlay">
+                            <h4>Samarqand ekskursiyasi</h4>
+                            <p>2026, oktyabr</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://uz.ujicy.uz/thumb/2/e-Tpp4K-OmyN_JyxJ6K_oQ/931r524/d/fot08351.jpg" alt="Laboratoriya">
+                        <div class="gallery-overlay">
+                            <h4>Kimyo laboratoriyasi</h4>
+                            <p>2025, aprel</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=500" alt="Konferensiya">
+                        <div class="gallery-overlay">
+                            <h4>Ilmiy konferensiya</h4>
+                            <p>2024, mart</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://xabar.uz/static/crop/3/8/920__95_3812339508.jpg" alt="Subbotnik">
+                        <div class="gallery-overlay">
+                            <h4>Obodonlashtirish</h4>
+                            <p>2024, aprel</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="events-section">
+                <h2 style="text-align: center; margin-bottom: 30px;">📅 SINF TADBIRLARI</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025, 25-may</div>
+                        <div class="timeline-content">
+                            <h4>🎓 Bitiruv kechasi</h4>
+                            <p>11-A sinfning tantanali bitiruv kechasi. Maktab majlislar zalida bo'lib o'tadi.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025, 15-may</div>
+                        <div class="timeline-content">
+                            <h4>🏆 "Eng bilimdon" tanlovi</h4>
+                            <p>Fanlar bo'yicha intellektual tanlov. 5 nafar o'quvchi ishtirok etadi.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025, 1-may</div>
+                        <div class="timeline-content">
+                            <h4>🎨 "Yosh iqtidorlar" ko'rgazmasi</h4>
+                            <p>O'quvchilarning ijodiy ishlari ko'rgazmasi. Sinfimizdan 8 nafar o'quvchi qatnashadi.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025, 20-aprel</div>
+                        <div class="timeline-content">
+                            <h4>🧹 Umumshahar subbotnik</h4>
+                            <p>Maktab hududini obodonlashtirish. Barcha o'quvchilar ishtirok etadi.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025, 5-aprel</div>
+                        <div class="timeline-content">
+                            <h4>🔬 Ilmiy-amaliy konferensiya</h4>
+                            <p>"Yosh tadqiqotchilar" mavzusida konferensiya. Sinfimizdan 4 nafar o'quvchi ma'ruza qiladi.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025, 21-mart</div>
+                        <div class="timeline-content">
+                            <h4>🌺 Navro'z bayrami</h4>
+                            <p>Navro'z bayramiga bag'ishlangan tantanali tadbir. Milliy taomlar tanlovi.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025, 8-mart</div>
+                        <div class="timeline-content">
+                            <h4>🌸 Xalqaro xotin-qizlar kuni</h4>
+                            <p>Onalar va qizlar uchun bayram konserti. Sinfimiz o'quvchilari tomonidan tayyorlangan.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025, 23-fevral</div>
+                        <div class="timeline-content">
+                            <h4>⚽ Maktablararo futbol turniri</h4>
+                            <p>Sinfimiz futbol jamoasi ishtirok etadi. 11-A va 11-B sinflar o'rtasida o'yin.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025, 14-fevral</div>
+                        <div class="timeline-content">
+                            <h4>💝 Valentin kuni</h4>
+                            <p>"Sevgi va do'stlik" mavzusida kecha. Sinfdoshlar o'rtasida sovg'alar almashish.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025, 28-yanvar</div>
+                        <div class="timeline-content">
+                            <h4>❄️ Qishki sayohat</h4>
+                            <p>Chimyon tog'lariga sayohat. Chang'i va snowboard musobaqalari.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025, 14-yanvar</div>
+                        <div class="timeline-content">
+                            <h4>🛡️ Vatan himoyachilari kuni</h4>
+                            <p>Harbiy-vatanparvarlik tadbiri. "Yosh qo'riqchi" musobaqasi.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025, 31-dekabr</div>
+                        <div class="timeline-content">
+                            <h4>🎄 Yangi yil kechasi</h4>
+                            <p>Sinfdagi yangi yil bayrami. Qiziqarli o'yinlar va sovg'alar.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal oyna -->
+    <div class="modal" id="studentModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 id="modalName">O'quvchi haqida</h2>
+            <div class="modal-info" id="modalInfo">
+                <!-- Ma'lumotlar dynamic ravishda qo'shiladi -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
